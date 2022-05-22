@@ -27,10 +27,18 @@ entity Song {
 	--
 	* album_id : VARCHAR
 	* title : VARCHAR
-	* duration : TIME
+	* duration : INT
 }
 
-entity Category {
+entity PlaylistCategory {
+	* id : VARCHAR
+	--
+	* name : VARCHAR
+	* image : VARCHAR
+	* icon : VARCHAR
+}
+
+entity PodcastCategory {
 	* id : VARCHAR
 	--
 	* name : VARCHAR
@@ -49,11 +57,23 @@ entity Playlist {
 }
 
 entity Podcast {
-
+	* id : VARCHAR
+	--
+	* name : VARCHAR
+	about : TEXT
+	image : VARCHAR
+	category_id : VARCHAR
+	* user_id : VARCHAR
 }
 
 entity Episode {
-
+	* id : VARCHAR
+	--
+	* podcast_id : VARCHAR
+	* title : VARCHAR
+	description : TEXT
+	published_at : DATE
+	duration : INT
 }
 
 
