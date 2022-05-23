@@ -1,6 +1,10 @@
 @startuml
-entity user {
-
+entity User {
+	* id : VARCHAR
+	--
+	* email : VARCHAR
+	* name : VARCHAR
+	birthday : DATE
 }
 
 entity Artist {
@@ -30,6 +34,16 @@ entity Song {
 	* duration : INT
 }
 
+entity Podcast {
+	* id : VARCHAR
+	--
+	* name : VARCHAR
+	about : TEXT
+	image : VARCHAR
+	category_id : VARCHAR
+	* user_id : VARCHAR
+}
+
 entity PlaylistCategory {
 	* id : VARCHAR
 	--
@@ -56,16 +70,6 @@ entity Playlist {
 	* user_id : VARCHAR
 }
 
-entity Podcast {
-	* id : VARCHAR
-	--
-	* name : VARCHAR
-	about : TEXT
-	image : VARCHAR
-	category_id : VARCHAR
-	* user_id : VARCHAR
-}
-
 entity Episode {
 	* id : VARCHAR
 	--
@@ -78,7 +82,27 @@ entity Episode {
 
 
 entity Concert {
-
+	* id : VARCHAR
+	--
+	* url : VARCHAR
+	* event_at : DATETIME
+	* location : VARCHAR
+	lon : DOUBLE
+	lat : DOUBLE
 }
+
+Artist }|--|{ Album : Has
+Album }|--|{ Song : Contains
+Artist ||--|{ Song : Sing
+PlaylistCategory |o--|{ Playlist
+User ||--o{ Playlist : Create
+Playlist }o--o{ Song : Contains
+PodcastCategory |o--|{ Podcast : Contains
+User ||--o{ Podcast : Create
+Podcast ||--o{ Episode : Contains
+Artist }|--o{ Concert : Perform
+User }o--o{ Artist : Follow
+User }o--o{ Song : Liked Song
+User }o--o{ Playlist : Follow
 
 @enduml
